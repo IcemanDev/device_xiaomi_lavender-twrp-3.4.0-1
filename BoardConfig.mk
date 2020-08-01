@@ -22,6 +22,10 @@
 # bitrot and build breakages. Building a component unconditionally does
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
+# Single credit to:
+# Richard Matthew Stallman (See wikipedia);
+# TeamWin for source code;
+# LineageOS for the source code.
 
 LOCAL_PATH := device/xiaomi/lavender
 
