@@ -33,3 +33,12 @@ mka adbd recoveryimage | tee twrp.log
 or single command (copy/paste in terminal):
 
 . build/envsetup.sh && breakfast lavender eng && rm -rf out && make clean && mka adbd recoveryimage | tee twrp.log
+
+
+Single credit to:
+
+Richard Matthew Stallman (See wikipedia);
+
+TeamWin for source code;
+
+LineageOS for the source code.
