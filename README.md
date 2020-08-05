@@ -1,6 +1,4 @@
-TWRP device tree for Xiaomi Redmi Note 7 (codenamed _"lavender"_)
-
-android_device_xiaomi_lavender
+# android_device_xiaomi_lavender
 
 Android 9 and 10 TWRP device tree for Xiaomi Redmi Note 7 (codname: lavender).
 
@@ -22,6 +20,7 @@ repo sync
 
 To compile:
 
+```
 cd ~/your_twrp_folder
 
 . build/envsetup.sh
@@ -34,11 +33,11 @@ or single command (copy/paste in terminal):
 
 . build/envsetup.sh && breakfast lavender eng && rm -rf out && make clean && mka adbd recoveryimage | tee twrp.log
 
+```
+If you want to build TWRP and kernel you need to flag TARGET_PREBUILT_KERNEL in the BoardConfig.mk file (#TARGET_PREBUILT_KERNEL) and download the kernel source code.
 
-Single credit to:
+Kernel source: https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b lavender-p-oss
 
-Richard Matthew Stallman (See wikipedia);
+cd ~/your_twrp_folder
 
-TeamWin for source code;
-
-LineageOS for the source code.
+git clone --depth=1 https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b lavender-p-oss kernel/xiaomi/lavender
