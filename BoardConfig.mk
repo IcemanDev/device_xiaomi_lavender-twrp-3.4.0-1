@@ -22,10 +22,6 @@
 # bitrot and build breakages. Building a component unconditionally does
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
-# Single credit to:
-# Richard Matthew Stallman (See wikipedia);
-# TeamWin for source code;
-# LineageOS for the source code.
 
 LOCAL_PATH := device/xiaomi/lavender
 
@@ -51,8 +47,8 @@ TARGET_NO_BOOTLOADER := true
 # Crypto
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_FBE := true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
-TARGET_HW_DISK_ENCRYPTION := true
+#TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
+#TARGET_HW_DISK_ENCRYPTION := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 earlycon=msm_serial_dm,0xc170000
@@ -61,13 +57,23 @@ BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_ena
 BOARD_KERNEL_CMDLINE += service_locator.enable=1 swiotlb=1 androidboot.configfs=true
 BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=a800000.dwc3 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
-BOARD_RAMDISK_OFFSET     := 0x01000000
+BOARD_RAMDISK_OFFSET     := 0x02000000
+BOARD_KERNEL_SEPARATED_DTBO := true
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
 
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz-dtb
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+	TARGET_KERNEL_APPEND_DTB := true
+	TARGET_KERNEL_ARCH := arm64
+	TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+	TARGET_KERNEL_HEADER_ARCH := arm64
+	TARGET_KERNEL_SOURCE := kernel/xiaomi/lavender
+	TARGET_KERNEL_CONFIG := lavender-perf_defconfig
+endif
 
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
 
